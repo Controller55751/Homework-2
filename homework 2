@@ -1,1 +1,10 @@
-
+cd ~
+mkdir log_backups
+cp logs/* log_backups/
+chmod 750 log_backups
+chmod 644 log_backups/error.log
+du -sh log_backups/ >> backup_stats.txt
+tar -czvf log_backup.tar log_backups/
+mkdir restored_logs
+tar -xzvf log_backup.tar -C restored_logs
+diff -r log_backups/ restored_logs/log_backups/
